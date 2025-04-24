@@ -4,8 +4,6 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace std;
-
 /*
     Function: getCelsius
     Purpose : Converts a Fahrenheit temperature to Celsius.
@@ -28,13 +26,13 @@ double getCelsius(int fahrenheit) {
 */
 int main() {
     // Print table header
-    cout << "Fahrenheit to Celsius Conversion Table\n";
-    cout << left << setw(12) << "Fahrenheit" << "Celsius\n";
+    std::cout << "Fahrenheit to Celsius Conversion Table\n";
+    std::cout << std::left << std::setw(12) << "Fahrenheit" << "Celsius\n";
 
     // Loop through Fahrenheit values 0 to 20
     for (int f = 0; f <= 20; f++) {
         double celsius = getCelsius(f);
-        cout << left << setw(12) << f << fixed << setprecision(2) << celsius << endl;
+        std::cout << std::left << std::setw(12) << f << std::fixed << std::setprecision(2) << celsius << std::endl;
     }
 
     return 0;
