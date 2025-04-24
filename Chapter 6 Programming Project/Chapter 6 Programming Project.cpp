@@ -1,20 +1,130 @@
-// Chapter 6 Programming Project.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+/*
+Project 1. Rectangle Properties
+Write a modular program that asks the user to enter the length and width of a rectangle. 
+The program then calculates and displays the perimeter and area of the rectangle. 
+The program should ask the user if they want to process another rectangle and continue to process rectangles 
+until the user until the user decides to quit.
 
+Input Validation: Do not accept negative values for length or the width. 
+
+*/
+
+//Headers files
 #include <iostream>
+#include <string>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+/*
+    Function   : getLength_Width
+    Purpose    : Prompts the user to enter the length and width of a rectangle.
+                 Validates that both values are greater than 0.
+    Parameters :
+        - double& length: reference to a double that stores the rectangle's length
+        - double& width : reference to a double that stores the rectangle's width
+    Returns    : Length and Width values returned by reference)
+    Preconditions:
+        - None
+    Postconditions:
+        - 'length' and 'width' will both be greater than 0
+*/
+void getLength_Width(double& length, double& width) {                       //		Pass by reference – length, width
+    do {
+        std::cout << "Enter length (> 0): ";                                //		User Input – length, width
+        std::cin >> length;
+        if (length <= 0) {                                                  //		Process – length and width must be > 0.
+            std::cout << "Length must be greater than 0. Try again.\n";
+        }
+    } while (length <= 0);
+
+    do {
+        std::cout << "Enter width (> 0): ";                                 //		User Input – length, width
+        std::cin >> width;
+        if (width <= 0) {                                                   //		Process – length and width must be > 0.
+            std::cout << "Width must be greater than 0. Try again.\n";
+        }
+    } while (width <= 0);
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+/*
+    Function   : calcPerimeter
+    Purpose    : Calculates the perimeter of a rectangle.
+    Parameters :
+        - double length: the length of the rectangle
+        - double width : the width of the rectangle
+    Returns    :
+        - double: the perimeter calculated as 2 * (length + width)
+    Preconditions:
+        - length and width must both be greater than 0
+    Postconditions:
+        - Returns the computed perimeter
+*/
+double calcPerimeter(double length, double width) {     //	Input – The length and width of the rectangle
+    return 2 * length + 2 * width;                      //  Process & Ouput – perimeter = 2 * length + 2 * width
+}                                                       
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+/*
+    Function   : calcArea
+    Purpose    : Calculates the area of a rectangle.
+    Parameters :
+        - double length: the length of the rectangle
+        - double width : the width of the rectangle
+    Returns    :
+        - double: the area calculated as length * width
+    Preconditions:
+        - length and width must both be greater than 0
+    Postconditions:
+        - Returns the computed area
+*/
+double calcArea(double length, double width) {          //	Input – The length and width of the rectangle
+    return length * width;                              //	Process & Output - area = length * width
+}                                               
+                                                 
+/*
+    Function   : displayProperties
+    Purpose    : Displays the perimeter and area of a rectangle.
+    Parameters :
+        - double perimeter: the perimeter of the rectangle
+        - double area     : the area of the rectangle
+    Returns    : None
+    Preconditions:
+        - perimeter and area must be correctly calculated prior to the call
+    Postconditions:
+        - Outputs perimeter and area to the console
+*/
+void displayProperties(double Perimeter, double Area) {         //		Input – The perimeter and area of a rectangle
+    std::cout << "The perimeter is " << Perimeter << std::endl; //		Output – Displays the perimeter and rectangle
+    std::cout << "The area is " << Area << std::endl;
+
+}
+
+/*
+    Function   : main
+    Purpose    : Runs the rectangle processing loop, calling necessary functions
+                 until the user decides to quit.
+    Parameters : None
+    Returns    :
+        - 0 upon successful execution
+    Preconditions:
+        - None
+    Postconditions:
+        - Continues to prompt the user until "quit" is entered
+*/
+int main() {
+   
+    double length, width;   // Declares variables to store Length and Width values of the rectangle
+    std::string input;      // Variable for storing string input for quit condition evaluation
+    
+    // Runs program once and then checks if user wants to quit or continue
+    do {
+        getLength_Width(length, width);
+
+        double Perimeter = calcPerimeter(length, width);
+        double Area = calcArea(length, width);
+
+        displayProperties(Perimeter, Area);
+
+        std::cout << "Do you want to process another rectangle? (type 'quit' to exit): "; // Asks quit or continue question
+        std::cin >> input;  //Stores input for evaluation
+
+    } while (input != "quit"); //If input is quit then program ends. If input is anything else then program loops over again.
+    return 0;
+}
